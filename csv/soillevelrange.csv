@@ -1,0 +1,24 @@
+,,,,,,,,,,,,,,,ELEMENT,METHOD OF EXTRACTION,SUFFICIENCY RANGE
+,,,,,,,,,,,,,,,"N, %",Kjeldahl 1,0.095-0.30
+,,,,,,,,,,,,,,,"P, ppm P ",Olsen1,5.0-10.0
+,Critical level range for pH,,OM,Olsen,Bray P2 (ppm),K,,Critical level range for pH,,OM,Olsen,Bray P2 (ppm),K,,"P, ppm P ",Bray1,7-20.0
+,,,%,ppm,,cmolc/kg,,,,%,ppm,,cmolc/kg,,"K, cmolc kg-1",Ammonium acetate 1,0.1-0.6
+,,,,,,soil,,,,,,,soil,,"Ca, cmolc kg-1",Ammonium acetate 1,5.0-20.0
+,5.5-6.5,Very high,>6.0,> 10.0,>20,> 1.20,,5.5-6.5,Very high,>6.0,,,,,"Mg, cmolc kg-1",Ammonium acetate 1,0.5-3
+,,High ,4.3-6.0,   5.1-10,15-20,0.60-1.20,,,High ,4.3-6.0,> 10.0,>20,0.6,,"Fe, ppm",DTPA2,4.0-10.0
+,,Medium ,2.1-4.2,< 5.0,10.0-15.0,0.30-0.40,,,Medium ,2.1-4.2,   5.1-10,7.0-20 ,0.25,,"Zn, ppm",DTPA2,0.5-5.0
+,,Low ,1.0-2.0,,<10.0,0.10-0.20,,,Low ,1.0-2.0,< 5.0,<3-7,0.15,,"Mn, ppm",DTPA2,0.5-3.5
+,,Very low,<1.0,,,<0.10,,References:,,,"Olsen et.al., (1954); ASA, 1982","Bray and Kurtz (1945); ASA, 1982",BSWM Manual,,"Cu, ppm",DTPA2,0.1-3.0
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,Soil pH,Range,,,,,,,,,,,,,,,
+,Extremely acid,< 4.4,,,,,,,,,,,,,,,
+,Very strongly acid, 4.5 – 5.0,,,,,,,,,,,,,,,
+,Strongly acid,5.1 – 5.5,,,,,,,,,,,,,,,
+,Moderately acid, 5.6 – 6.0,,,,,,,,,,,,,,,
+,Slightly acid ,6.1 – 6.5,,,,,,,,,,,,,,,
+,Neutral,6.6 – 7.3,,,,,,,,,,,,,,,
+,Slightly alkaline,7.4 – 7.8,,,,,,,,,,,,,,,
+,Moderately alkali,7.9 – 8.4,,,,,,,,,,,,,,,
+,Strongly alkali,8.5-9.0,,,,,,,,,,,,,,,
+,Extremely alkali,> 9.0,,,,,,,,,,,,,,,

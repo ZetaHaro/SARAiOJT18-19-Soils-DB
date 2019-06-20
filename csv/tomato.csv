@@ -1,0 +1,3 @@
+ID,Crop,pH,Organic Matter  (OM) %,Nitrogen (N) %,Phosphorus (P) ppm,P Analysis,Potassium (K) cmolc/kg soil,Textural Grade,Remarks / Soil Fertility Constraint,Lab No.,Sample Code,Collaborator,Barangay,Municipality,Province,Latitude ( N),Longitude (E),Date Sampled,Depth (cm)
+10,Tomato,Slightly alkali,med,med,high,Olsen,high,Clay,"texture,high pH, low OM ",S-1523,10,Mariano Marcos State University (MMSU),MMSU Compound,Batac,Ilocos Norte,18.0636,120.5490,"July 20, 2018",0-15
+11,Tomato,Slightly alkali,low,low,high,Olsen,high,Loam,"high pH, low OM and N",S-1524,11,Mariano Marcos State University (MMSU),MMSU Compound,Batac,Ilocos Norte,18.0636,120.5490,"July 20, 2018",15-30

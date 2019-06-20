@@ -1,0 +1,11 @@
+Critical level range for pH,,OM,Olsen P,Bray P2 (ppm),K,,ELEMENT,METHOD OF EXTRACTION,SUFFICIENCY RANGE
+,,%,ppm,,cmolc/kg,,"N, %",Kjeldahl 1,0.095-0.30
+,,,,,soil,,"P, ppm P ",Olsen1,5.0-10.0
+5.5-6.5,Very high,>6.0,,,,,"P, ppm P ",Bray1,7-20.0
+,High ,4.3-6.0,> 10.0,>20,0.6,,"K, cmolc kg-1",Ammonium acetate 1,0.1-0.6
+,Medium ,2.1-4.2,   5.1-10,7.0-20 ,0.25,,"Ca, cmolc kg-1",Ammonium acetate 1,5.0-20.0
+,Low ,1.0-2.0,< 5.0,<3-7,0.15,,"Mg, cmolc kg-1",Ammonium acetate 1,0.5-3
+,,,,,,,"Fe, ppm",DTPA2,4.0-10.0
+,,,,,,,"Zn, ppm",DTPA2,0.5-5.0
+,,,,,,,"Mn, ppm",DTPA2,0.5-3.5
+,,,,,,,"Cu, ppm",DTPA2,0.1-3.0

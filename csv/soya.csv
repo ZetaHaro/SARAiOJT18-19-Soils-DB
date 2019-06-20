@@ -1,0 +1,6 @@
+ID,Crop,pH,pH,Organic Matter  (OM) %,Nitrogen (N) %,Phosphorus (P) ppm,P Analysis,Potassium (K) cmolc/kg soil,Textural Grade,Remarks / Soil Fertility Constraint,Lab No.,Sample Code,Collaborator,Barangay,Municipality,Province,Latitude ( N),Longitude (E),Date Sampled,Depth (cm)
+5,Soybean,6.3,Slightly acidic,low,low,high,Olsen,medium,Loam,"low organic matter, low nitrogen",S-1518,5,Central Luzon State University (CLSU),CLSU Compound,Munoz,Nueva Ecija,15.7324,120.9294,"July 17, 2018",-
+6,Soybean,4.6,Very strongly acidic,low,medium,low,Bray,medium,Sandy Clay Loam,"low pH, low organic matter, low P",S-1519,6,Isabela State University (ISU),Villa Fermin,Echague,Isabela,16.5896,121.6331,"July 19, 2018",-
+12,Soybean,6.1,Slightly acidic,low,medium,high,Olsen,high,Clay Loam,low organic matter,S-1525,12,University of the Philippines Los Baños (UPLB),UPLB Compound (Pili Drive),Los Banos,Laguna,14.1664,121.2533,"August 10, 2018",-
+13,Soybean,6.2,Slightly acidic,low,medium,high,Olsen,high,Clay Loam,low organic matter,S-1526,13,University of the Philippines Los Baños (UPLB),UPLB Compound (Pili Drive),Los Banos,Laguna,14.1660,121.2530,"August 10, 2018",-
+63,Soybean,4.9,Very strongly acidic,low,medium,medium,Bray,medium,Clay,"low pH, low P, texture",S-255,63,Central Mindanao University (CMU),CMU Compound,Maramag,Bukidnon,7.8542,125.0578,"November 16, 2018",-

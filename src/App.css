@@ -1,0 +1,121 @@
+body {
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+}
+
+#root{
+  height: 100%;
+}
+
+.map{
+  height: 500px;
+  z-index: 999;
+}
+
+#message-form {
+  z-index: 999;
+  position: absolute;
+  top: 80px;
+  left: 60px;
+}
+
+#navClass {
+	position: sticky;
+	height: 65px;
+	top: 0px;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 9999;
+}
+
+.navbar-brand {
+	position: absolute;
+	top: 0%;
+	width: 400px;
+	height: 60px;
+	left: 40px;
+}
+
+#sarai-community {
+	color: #6C6B6B;
+    font-size: 100%;
+    position: relative;
+    font-weight: 500;
+    padding: 0px 15px 0px 15px;
+    top: 12px;
+}
+
+#about-us-link {
+	color: #6C6B6B;
+    font-size: 100%;
+    position: relative;
+    font-weight: 500;
+    padding: 0px 15px 0px 15px;
+    top: 12px;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+#explore-link {
+    color: #6C6B6B;
+    font-size: 100%;
+    position: relative;
+    font-weight: 500;
+    padding: 12px 15px 0px 15px;
+}
+
+#dss-link {
+    color: #6C6B6B;
+    font-size: 100%;
+    position: relative;
+    font-weight: 500;
+    padding: 12px 15px 0px 15px;
+}
+
+#get-involved-link {
+	color: #6C6B6B;
+    font-size: 100%;
+    position: relative;
+    font-weight: 500;
+    padding: 12px 15px 0px 15px;
+}
+
+
+.dost-pcaarrd-uplb-logo {
+    margin-right: 1em;
+    height: 50px;
+    width: auto;
+}
+
+#layers-control {
+	position: absolute;
+	z-index: 9999;
+	top: 80px;
+	right: 80px;
+}
+
+.leaflet-touch .leaflet-bar a {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+
+#myTable {
+    position: absolute;
+    bottom: 10px;
+    z-index: 9999;
+}

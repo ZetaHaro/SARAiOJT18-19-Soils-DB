@@ -1,0 +1,26 @@
+ID,Crop,pH,pH,Organic Matter  (OM) %,Nitrogen (N) %,Phosphorus (P) ppm,P Analysis,Potassium (K) cmolc/kg soil,Textural Grade,Remarks / Soil Fertility Constraint,Lab No.,Sample Code,Collaborator,Barangay,Municipality,Province,Latitude ( N),Longitude (E),Date Sampled,Depth (cm)
+23,Corn,5.6,Moderately acidic,medium,medium,medium,Bray,high,Sandy Loam,"low P, acidic bases such as Ca and Mg may be low",S-1536,23,BU,Tuburan,Ligao,Albay,13.2334,123.5537,"August 23, 2018",-
+27,Corn,6.4,Slightly acidic,low,medium,medium,Olsen,low,Silt Loam,"low OM, low K",S-1540,27,MinSCAT,Alcate,Victoria,Oriental Mindoro,13.1425,121.1768,"October 2, 2018",-
+64,Corn,4.9,Very strongly acidic,high,medium,low,Bray,medium,Clay,"low P, highly acidic, Ca and Mg may be low, drainage should be checked",S-256,64,CMU,CMU Compound,Maramag,Bukidnon,7.8542,125.0578,"November 16, 2018",-
+106,Corn,6.0,Moderately acidic,medium,medium,high,Bray,medium,Clay Loam,suitable,S-338,106,WVSU,Binalud,Alimodian,Iloilo,10.7948,122.4291,"November 3, 2018",-
+107,Corn,6.7,Neutral,low,medium,high,Olsen,high,Clay,drainage should be checked,S-339,107,WVSU,Siwalo,Alimodian,Iloilo,10.8528,122.4325,"November 3, 2018",-
+108,Corn,6.8,Neutral,low,low,high,Olsen,medium,Silt Loam,low OM,S-340,108,WVSU,Piand-An Sur,Alimodian,Iloilo,10.8434,122.4276,"November 3, 2018",-
+109,Corn,6.8,Neutral,medium,medium,high,Olsen,medium,Clay,drainage should be checked,S-341,109,WVSU,Ulay-Bungang,Alimodian,Iloilo,10.8053,122.4259,"November 3, 2018",-
+110,Corn,7.1,Neutral,medium,medium,high,Olsen,high,Clay,drainage should be checked for possibility of water logging.,S-342,110,WVSU,Binalud,Alimodian,Iloilo,10.7972,122.4300,"November 3, 2018",-
+111,Corn,6.8,Neutral,low,medium,high,Olsen,medium,Loam,low organic matter,S-343,111,WVSU,WVSU Compound,Lambunao,Iloilo,11.1066,124.4143,"October 28, 2018",-
+112,Corn,7.2,Neutral,low,medium,high,Olsen,high,Sandy Loam,low organic matter,S-344,112,WVSU,Agsirab,Lambunao,Iloilo,11.0787,124.4001,"October 28, 2019",-
+113,Corn,7.2,Neutral,low,medium,high,Olsen,high,Loam,suitable,S-345,113,WVSU,Agsirab,Lambunao,Iloilo,11.0792,124.4009,"October 28, 2020",-
+114,Corn,6.2,Slightly acidic,low,medium,high,Olsen,high,Clay Loam,low organic matter,S-346,114,WVSU,Agsirab,Lambunao,Iloilo,11.0809,124.4071,"October 28, 2021",-
+115,Corn,5.4,Strongly acidic,medium,medium,low,Bray,high,Silty Clay Loam,"low P, acidic ",S-347,115,WVSU,Agdalusan,Lambunao,Iloilo,11.0955,124.3882,"October 28, 2022",-
+116,Corn,5.5,Strongly acidic,medium,medium,low,Bray,high,Clay,"low P, drainage should be checked",S-348,116,WVSU,Walang,Lambunao,Iloilo,11.0909,124.4399,"October 28, 2023",-
+118,Corn,5.9,Moderately acidic,medium,medium,high,Bray,high,Sandy Loam,low N ,S-350,118,BU,Tuburan,Ligao,Bicol,13.2334,123.5532,"November 29, 2018",-
+119,Corn,6.1,Slightly acidic,medium,medium,high,Olsen,high,Sandy Loam,,S-351,119,BU,Tuburan,Ligao,Bicol,13.2319,123.5535,"November 29, 2018",-
+120,Corn,6.0,Moderately acidic,medium,low,high,Bray,medium,Sandy Loam,,S-352,120,BU,Tuburan,Ligao,Bicol,13.2319,123.5542,"November 30, 2018",-
+121,Corn,5.9,Moderately acidic,medium,medium,high,Bray,high,Sandy Loam,acidic Ca and Mg may be limiting,S-353,121,BU,Tuburan,Ligao,Bicol,13.2340,123.5542,"November 29, 2018",-
+122,Corn,6.1,Slightly acidic,medium,medium,high,Olsen,medium,Sandy Loam," low P,",S-354,122,BU,Tuburan,Ligao,Bicol,13.2349,123.5520,"November 30, 2018",-
+124,Corn,5.9,Moderately acidic,medium,medium,high,Bray,high,Sandy Loam,acidic Ca and Mg may be limiting,S-356,124,BU,Tuburan,Ligao,Bicol,13.2319,123.5541,"November 30, 2018",-
+125,Corn,6.0,Moderately acidic,low,low,high,Bray,high,Sandy Loam,low N,S-357,125,BU,Tuburan,Ligao,Bicol,13.2333,123.5538,"November 29, 2018",-
+126,Corn,7.4,Slightly alkali,low,low,high,Olsen,medium,Clay,"apply N, high pH should check for Zn and Bo availability, texture",S-358,126,CTU,CTU Campus,Barili,Cebu,10.1329,123.5478,"December 8, 2018",-
+127,Corn,7.6,Slightly alkali,low,low,high,Olsen,medium,Clay,"apply N, high pH should check for Zn and Bo availability,texture",S-359,127,CTU,Bagakay,Barili,Cebu,10.1046,123.5478,"December 7, 2018",-
+128,Corn,7.7,Slightly alkali,low,low,high,Olsen,medium,Clay,"apply N, high pH should check for Zn and Bo availability,texture",S-360,128,CTU,Gunting,Barili,Cebu,10.0979,123.5256,"December 7, 2018",-
+129,Corn,7.9,Moderately alkali,low,low,high,Olsen,medium,Clay,"apply N, high pH should check for Zn and Bo availability,texture",S-361,129,CTU,Tal-ot,Barili,Cebu,10.1205,123.5721,"December 8, 2018",-
