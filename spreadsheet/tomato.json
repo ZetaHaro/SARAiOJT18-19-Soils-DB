@@ -1,0 +1,40 @@
+[
+    {
+        "crop": "Tomato",
+        "ph": "Slightly alkali",
+        "organicMatterOm": "med",
+        "nitrogenN": "med",
+        "phosphorusPPpm": "high",
+        "pAnalysis": "Olsen",
+        "potassiumKCmolckgSoil": "high",
+        "texturalGrade": "Clay",
+        "remarksSoilFertilityConstraint": "texture,high pH, low OM",
+        "collaborator": "Mariano Marcos State University (MMSU)",
+        "barangay": "MMSU Compound",
+        "municipality": "Batac",
+        "province": "Ilocos Norte",
+        "latitudeN": 18.0636,
+        "longitudeE": 120.549,
+        "dateSampled": "2018-07-19T16:00:00.000Z",
+        "depthCm": "0-15"
+    },
+    {
+        "crop": "Tomato",
+        "ph": "Slightly alkali",
+        "organicMatterOm": "low",
+        "nitrogenN": "low",
+        "phosphorusPPpm": "high",
+        "pAnalysis": "Olsen",
+        "potassiumKCmolckgSoil": "high",
+        "texturalGrade": "Loam",
+        "remarksSoilFertilityConstraint": "high pH, low OM and N",
+        "collaborator": "Mariano Marcos State University (MMSU)",
+        "barangay": "MMSU Compound",
+        "municipality": "Batac",
+        "province": "Ilocos Norte",
+        "latitudeN": 18.0636,
+        "longitudeE": 120.549,
+        "dateSampled": "2018-07-19T16:00:00.000Z",
+        "depthCm": "15-30"
+    }
+]

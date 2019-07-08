@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import 'leaflet/dist/leaflet.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+//import 'bootstrap/dist/css/bootstrap.css';
+import "mdbreact/dist/css/mdb.css";
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-leaflet-markercluster/dist/styles.min.css';
 
 import * as serviceWorker from './serviceWorker';
 

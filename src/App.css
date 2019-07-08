@@ -119,3 +119,28 @@ body {
     bottom: 10px;
     z-index: 9999;
 }
+
+#buttonDropdown{
+    position: relative;
+    color: #6C6B6B;
+}
+
+.draggable-grounds {
+  height: calc(100vh - 50px);
+  width: calc(100vh - 100px);
+  padding: 20px;
+}
+
+#cardClose {
+  position: absolute;
+  z-index: 999999;
+  left: 11px;
+  bottom: 72px;
+}
+
+#hidebutton {
+  width: 30px;
+  height: 30px;
+  background-size: 50%;
+}
+
