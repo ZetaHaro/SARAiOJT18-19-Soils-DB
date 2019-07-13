@@ -24,8 +24,8 @@ body {
 	position: sticky;
 	height: 65px;
 	top: 0px;
-    background-color: rgba(255, 255, 255, 0.5);
-    z-index: 9999;
+  background-color: rgba(255, 255, 255);
+  z-index: 9999;
 }
 
 .navbar-brand {
@@ -144,3 +144,34 @@ body {
   background-size: 50%;
 }
 
+#button_toggle {
+  background-color: green;
+  color: white;
+}
+
+#modal_1 {
+  z-index: 9999;
+}
+
+.sarai-modal {
+  position: absolute;
+  top: 10px;
+  width: 250px;
+  height: 40px;
+  left: 20px;
+}
+
+.soils-modal {
+  position: absolute;
+  top: 4px;
+  width: 160px;
+  height: 50px;
+  left: 300px;
+}
+
+.card-bounds {
+  height: 500px;
+  position: absolute;
+  top: 66px;
+  width: 100%;
+}

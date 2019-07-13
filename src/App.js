@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import L from 'leaflet';
@@ -17,32 +17,73 @@ import { Card, CardImg, CardBody, Button, CardTitle, CardText, Form, FormGroup, 
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 import { Map, TileLayer, Marker, Popup, LayersControl, ZoomControl } from 'react-leaflet';
-import {Table} from "./Table";
+//import {BananaMarkers} from "./BananaMarkers";
 
 import { MDBDataTable, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, 
-        MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter
+        MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBTable, 
+        MDBTableBody, MDBTableHead
         } from "mdbreact";
 import Tabletop from 'tabletop';
-import {Modal} from 'react-bootstrap';
+import {Modal, Glyphicon} from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
+
+type Position = [number, number];
+
+type Props = {|
+  content: string,
+  position: Position,
+  icon: bananaIcon
+|};
+
+type MarkerData = {| ...Props, key: string |};
+
+const MyPopupMarker = ({ content, position, icon }: Props) => (
+  <Marker position={position} icon={icon}>
+    <Popup>{content}</Popup>
+  </Marker>
+);
+
+const MyMarkersList = ({ markers }: { markers: Array<MarkerData> }) => {
+  const items = markers.map(({ key, ...props }) => (
+    <MyPopupMarker key={key} {...props} />
+  ))
+  return <Fragment>{items}</Fragment>
+};
+
+type State = {
+  markers: Array<MarkerData>,
+};
 
 
-const { BaseLayer, Overlay } = LayersControl
+
+const { BaseLayer, Overlay } = LayersControl;
 
 
 const options = [
   { value: 'banana', label: 'Banana' },
   { value: 'cacao', label: 'Cacao' },
   { value: 'corn', label: 'Corn' },
+  { value: 'coffee', label: 'Coffee' },
   { value: 'rice', label: 'Rice' },
   { value: 'soya', label: 'Soya' },
   { value: 'sugarcane', label: 'Sugarcane' },
   { value: 'tomato', label: 'Tomato' },
+  { value: 'all', label: 'All' },
 ];
 
 const province = [
-  { value: 'laguna', label: 'Laguna' },
-  { value: 'oriental mindoro', label: 'Oriental Mindoro' },
-  { value: 'isabela', label: 'Isabela' },
+  { value: 'laguna', 
+  label: 'Laguna' },
+  { value: 'oriental mindoro', 
+  label: 'Oriental Mindoro' },
+  { value: 'Isabela', 
+  label: 'Isabela' },
+  { value: 'north cotabato', 
+  label: 'North Cotabato' },
+  { value: 'misamis oriental', 
+  label: 'Misamis Oriental' },
+  { value: 'misamis oriental', 
+  label: 'Misamis Oriental' },
 ];
 
 const municipality = [
@@ -51,32 +92,87 @@ const municipality = [
   { value: 'jones', label: 'Jones' },
 ];
 
-var blueIcon = L.icon({
-    iconUrl: 'banana1.png',
-    iconSize: [50, 50],
+var cacaoIcon = L.icon({
+    iconUrl: 'cacaomarker.png',
+    iconSize: [55, 55],
     iconAnchor: [12.5, 41],
     popupAnchor: [0, -41], 
     shadowUrl: 'my-icon-shadow.png',
     shadowSize: [68, 95],
 });
 
-var greenIcon = L.icon({
-    iconUrl: 'corn1.png',
-    iconSize: [50, 50],
+var bananaIcon = L.icon({
+    iconUrl: 'bananamarker.png',
+    iconSize: [55, 55],
     iconAnchor: [12.5, 41],
     popupAnchor: [0, -41], 
     shadowUrl: 'my-icon-shadow.png',
     shadowSize: [68, 95],
 });
 
-var redIcon = L.icon({
-    iconUrl: 'rice1.png',
-    iconSize: [50, 50],
+var cornIcon = L.icon({
+    iconUrl: 'cornmarker.png',
+    iconSize: [55, 55],
     iconAnchor: [12.5, 41],
     popupAnchor: [0, -41], 
     shadowUrl: 'my-icon-shadow.png',
     shadowSize: [68, 95],
 });
+
+var coffeeIcon = L.icon({
+    iconUrl: 'coffeemarker.png',
+    iconSize: [55, 55],
+    iconAnchor: [12.5, 41],
+    popupAnchor: [0, -41], 
+    shadowUrl: 'my-icon-shadow.png',
+    shadowSize: [68, 95],
+});
+
+var riceIcon = L.icon({
+    iconUrl: 'ricemarker.png',
+    iconSize: [55, 55],
+    iconAnchor: [12.5, 41],
+    popupAnchor: [0, -41], 
+    shadowUrl: 'my-icon-shadow.png',
+    shadowSize: [68, 95],
+});
+
+var soyIcon = L.icon({
+    iconUrl: 'soybeanmarker.png',
+    iconSize: [55, 55],
+    iconAnchor: [12.5, 41],
+    popupAnchor: [0, -41], 
+    shadowUrl: 'my-icon-shadow.png',
+    shadowSize: [68, 95],
+});
+
+var sugarCaneIcon = L.icon({
+    iconUrl: 'sugarcanemarker.png',
+    iconSize: [55, 55],
+    iconAnchor: [12.5, 41],
+    popupAnchor: [0, -41], 
+    shadowUrl: 'my-icon-shadow.png',
+    shadowSize: [68, 95],
+});
+
+var tomatoIcon = L.icon({
+    iconUrl: 'tomatomarker.png',
+    iconSize: [55, 55],
+    iconAnchor: [12.5, 41],
+    popupAnchor: [0, -41], 
+    shadowUrl: 'my-icon-shadow.png',
+    shadowSize: [68, 95],
+});
+
+const bananaID = '1UEUrcBZWiPYr3f0sOEpcaS5SjpaFO1Dm7e2l47uOaRg';
+const cornID = '1TGbBxufMVRBCGUpNvOTZN9cV6qOGiQaP3FiQD1187FA';
+const cacaoID = '1OfAOQjibxGUTyPPAcgQ7tQX1rx_f2zsXK_MANy97Hq0';
+const riceID = '1ytQ4eaRntQakcKyStP7_i1oAWjgqpTCimOY_HZ_CGrE';
+const soybeanID = '1e4uZzHWHwTsKuR13Sc2Ezh_eA0ecvHKTNeQCgCHfl2Q';
+const tomatoID = '1D9TS3yKL6laJCEGgD0zTMGVns0FRjQ3q2mEd_t91fNU';
+const sugarCaneID = '1KXrAjUrXJ2oYCd7gC5Pl06Z5gIhVxjIwxyuMT_Nsezw';
+const coffeeID = '1v8XwFx6rF7dI1ZG_Fm76EPTSxz9hruOCS9feshvzOn4';
+const allCropsID = '10-SwhJ1XueMHIJ_64eOQIFocBKXbeiYwLcp-SVVP62k';
 
 
 
@@ -86,8 +182,12 @@ class App extends Component{
     this.toggle = this.toggle.bind(this);
     this.toggleCard = this.toggleCard.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.untoggleModal = this.untoggleModal.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.changeIcon = this.changeIcon.bind(this);
+    this.toggleSearch = this.toggleSearch.bind(this);
+    this.checkSoilProfile = this.checkSoilProfile.bind(this);
     this.state = { 
       location: {
         lat: 12.8797,
@@ -105,22 +205,39 @@ class App extends Component{
       selectedOption: null,
       selectedProvince: null,
       selectedMunicipality: null,
-      markers: [
-      { key: 'marker1', position: [51.5, -0.1], content: 'My first popup' },
-      { key: 'marker2', position: [51.51, -0.1], content: 'My second popup' },
-      { key: 'marker3', position: [51.49, -0.05], content: 'My third popup' },
-      ],
       dataSet: [],
       tableRows: [],
       modal: false,
       show: false,
+      modalData: [],
+      crop: null,
+      pH: null,
+      om: null,
+      nitrogen: null,
+      phosphorus: null,
+      pAnalysis: null,
+      potassium: null,
+      texturalGrade: null,
+      remarks: null,
+      collaborator: null,
+      barangay: null,
+      municipality: null,
+      province: null,
+      latitude: null,
+      longitude: null,
+      dateSampled: null,
+      soilProfile: null,
+      provinceList: [],
+      markers: [],
+      googleSheetID: null,
+      setBoolean: false,
+      pdfText: null,
+      soilPdf: null,
     };
 
   }
-
-  
-
   componentDidMount() {
+
     navigator.geolocation.getCurrentPosition((position) =>  {
       this.setState({
         location: {
@@ -138,17 +255,27 @@ class App extends Component{
           console.log(location);
         });
     });
+  }
 
+  componentWillUnmount() {
     Tabletop.init({
-      key: '1UEUrcBZWiPYr3f0sOEpcaS5SjpaFO1Dm7e2l47uOaRg',
+      key: this.state.googleSheetID,
       callback: googleData => {
         console.log(googleData)
         this.setState({
           tableRows: googleData.map((post) => {
             return (
-              {
+              { 
                 button: <div>
-                        <MDBBtn onClick={this.toggleModal}>+</MDBBtn>
+
+                        <div>
+                        
+                        <button id = "button_toggle" onClick={() => this.toggleModal(post)} >
+                        <FontAwesome
+                          className='fas fa-plus'
+                        />
+                        </button>
+                        </div>
                         </div>
                         ,
                 crop: post.crop,
@@ -160,12 +287,118 @@ class App extends Component{
                 potassium: post.potassium,
               }
             )
-          })
+          }),
+          provinceList: googleData.map((post) => {
+            return (
+              
+                { 
+                value: post.province, label: post.province 
+                }
+              
+            )
+          }),
+          markers: googleData.map((post) => {
+            return (
+              {
+                key: post.id,
+                position: [post.latitude, post.longitude],
+                content:
+
+                        <div>
+                        Province: {post.province}
+                        <br /> 
+                        Crop: {post.crop}
+                        <br />
+                        pH: {post.pH}
+                        <br/> 
+                        <button onClick={() => this.toggleModal(post)} >
+                        See more
+                        </button>
+                        </div>
+                        ,
+                  icon: this.changeIcon(post),
+
+              }
+            )
+          }),
         })
       },
       simpleSheet: true
     })
   }
+
+
+  componentDidUpdate() {
+    Tabletop.init({
+      key: this.state.googleSheetID,
+      callback: googleData => {
+        console.log(googleData)
+        this.setState({
+          tableRows: googleData.map((post) => {
+            return (
+              { 
+                button: <div>
+
+                        <div>
+                        
+                        <button id = "button_toggle" onClick={() => this.toggleModal(post)} >
+                        <FontAwesome
+                          className='fas fa-plus'
+                        />
+                        </button>
+                        </div>
+                        </div>
+                        ,
+                crop: post.crop,
+                pH: post.pH,
+                om: post.om,
+                nitrogen: post.nitrogen,
+                phosphorus: post.phosphorus,
+                pAnalysis: post.pAnalysis,
+                potassium: post.potassium,
+              }
+            )
+          }),
+          provinceList: googleData.map((post) => {
+            return (
+              
+                { 
+                value: post.province, label: post.province 
+                }
+              
+            )
+          }),
+          markers: googleData.map((post) => {
+            return (
+              {
+                key: post.id,
+                position: [post.latitude, post.longitude],
+                content:
+
+                        <div>
+                        Province: {post.province}
+                        <br /> 
+                        Crop: {post.crop}
+                        <br />
+                        pH: {post.pH}
+                        <br/> 
+                        <button onClick={() => this.toggleModal(post)} >
+                        See more
+                        </button>
+                        </div>
+                        ,
+                  icon: this.changeIcon(post),
+
+              }
+            )
+          }),
+        })
+      },
+      simpleSheet: true
+    })
+  }
+
+  
 
   formSubmitted = (event) => {
     event.preventDefault();
@@ -190,15 +423,74 @@ class App extends Component{
     this.setState({ show: true });
   }
 
+  changeIcon(post) {
+    var cropIcon;
+    if (post.crop === "Banana"){
+      cropIcon = bananaIcon;
+    }
+    else if (post.crop === "Cacao"){
+      cropIcon = cacaoIcon;
+    }
+    else if (post.crop === "Coffee"){
+      cropIcon = coffeeIcon;
+    }
+    else if (post.crop === "Corn"){
+      cropIcon = cornIcon;
+    }
+    else if (post.crop === "Rice"){
+      cropIcon = riceIcon;
+    }
+    else if (post.crop === "Tomato"){
+      cropIcon = tomatoIcon;
+    }
+    else if (post.crop === "Sugarcane"){
+      cropIcon = sugarCaneIcon;
+    }
+
+    else if (post.crop === "Soybean"){
+      cropIcon = soyIcon;
+    }
+    return cropIcon
+  }
+
   handleClose() {
     this.setState({ show: false });
   }
 
-  toggleModal = () => {
+  toggleModal(post) {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
+      crop: post.crop,
+      pH: post.pH,
+      om: post.om,
+      nitrogen: post.nitrogen,
+      phosphorus: post.phosphorus,
+      pAnalysis: post.pAnalysis,
+      potassium: post.potassium,
+      texturalGrade: post.texturalGrade,
+      remarks: post.remarks,
+      collaborator: post.collaborator,
+      barangay: post.barangay,
+      municipality: post.municipality,
+      province: post.province,
+      latitude: post.latitude,
+      longitude: post.longitude,
+      dateSampled: post.dateSampled,
+      soilProfile: post.soilProfile,
     });
+
+    
   }
+
+  untoggleModal() {
+    this.setState({
+      modal: !this.state.modal,
+     
+    });
+
+    
+  }
+
 
   toggleCard() {
     this.setState(state => ({ collapseCard: !state.collapseCard }));
@@ -211,8 +503,141 @@ class App extends Component{
   }
 
   dropDownChange = selectedOption => {
-    this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
+    this.setState({ 
+      selectedOption, 
+    });
+    
+    //console.log(googleSheetID),
+    console.log(`Option selected:`, selectedOption.value);
+  }
+
+  toggleSearch() {
+    if (this.state.selectedOption.value === 'banana'){
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: '',
+        })
+      }, 100);
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: bananaID,
+        })
+      }, 2000);
+    }
+    else if (this.state.selectedOption.value === 'cacao'){
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: '',
+        })
+      }, 100);
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: cacaoID,
+        })
+      }, 2000);
+    }
+    else if (this.state.selectedOption.value === 'coffee'){
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: '',
+        })
+      }, 100);
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: coffeeID,
+        })
+      }, 2000);
+    }
+    else if (this.state.selectedOption.value === 'corn'){
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: '',
+        })
+      }, 100);
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: cornID,
+        })
+      }, 2000);
+    }
+    else if (this.state.selectedOption.value === 'rice'){
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: '',
+        })
+      }, 100);
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: riceID,
+        })
+      }, 2000);
+    }
+    else if (this.state.selectedOption.value === 'sugarcane'){
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: '',
+        })
+      }, 100);
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: sugarCaneID,
+        })
+      }, 2000);
+    }
+    else if (this.state.selectedOption.value === 'soya'){
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: '',
+        })
+      }, 100);
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: soybeanID,
+        })
+      }, 2000);
+    }
+    else if (this.state.selectedOption.value === 'tomato'){
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: '',
+        })
+      }, 100);
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: tomatoID,
+        })
+      }, 2000);
+    }
+    else if (this.state.selectedOption.value === 'all'){
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: '',
+        })
+      }, 100);
+      setTimeout(() => {
+        this.setState({
+        googleSheetID: allCropsID,
+        })
+      }, 2000);
+    }
+
+    alert(this.state.soilProfile);
+    console.log(this.state.soilProfile);
+    
+    console.log(this.state.selectedOption.value)
+  }
+
+  checkSoilProfile(){
+    if (this.state.soilProfile === null) {
+      this.setState({
+        pdfText: <b>None</b>,
+      })
+    }
+    else {
+      this.setState({
+        pdfText: <b>Download PDF</b>,
+      })
+    }
   }
 
   dropDownProvince = selectedProvince => {
@@ -236,6 +661,7 @@ class App extends Component{
     const { selectedProvince } = this.state;
     const { selectedMunicipality } = this.state;
     const {dataSet} = this.state;
+    const {open} = this.state;
 
     const dataSheet = {
       columns: [
@@ -258,19 +684,19 @@ class App extends Component{
           width: 200
         },
         {
-          label: 'Organic Matter (OM) %',
+          label: 'Organic Matter (OM)',
           field: 'om',
           sort: 'asc',
           width: 200
         },
         {
-          label: 'Nitrogen (N) %',
+          label: 'Nitrogen (N)',
           field: 'nitrogen',
           sort: 'asc',
           width: 270
         },
         {
-          label: 'Phosphorus (P) ppm',
+          label: 'Phosphorus (P)',
           field: 'phosphorus',
           sort: 'asc',
           width: 270
@@ -282,7 +708,7 @@ class App extends Component{
           width: 270
         },
         {
-          label: 'Potassium (K) cmolc/kg soil',
+          label: 'Potassium (K)',
           field: 'potassium',
           sort: 'asc',
           width: 270
@@ -291,10 +717,33 @@ class App extends Component{
       rows: this.state.tableRows
     };
 
+    const modalSheet = {
+      crop: this.state.crop,
+      pH: this.state.pH,
+      om: this.state.om,
+      nitrogen: this.state.nitrogen,
+      phosphorus: this.state.phosphorus,
+      pAnalysis: this.state.pAnalysis,
+      potassium: this.state.potassium,
+      texturalGrade: this.state.texturalGrade,
+      remarks: this.state.remarks,
+      collaborator: this.state.collaborator,
+      barangay: this.state.barangay,
+      municipality: this.state.municipality,
+      province: this.state.province,
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+      dateSampled: this.state.dateSampled,
+      soilProfile: this.state.soilProfile,
+    };
+
+    const pList = this.state.provinceList;
+    const mList = this.state.markersList;
+
     return (
       <div className="map">
         <div id="navClass">
-      	<Navbar id="navClass" color="light" light expand="md">
+        <Navbar id="navClass" color="light" light expand="md">
           <NavbarBrand href="/"><img class="navbar-brand" src="header_green.png"></img></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -386,7 +835,7 @@ class App extends Component{
 
 
         <Map className="map" center={position} zoom={this.state.zoom} zoomControl={false}>
-        	<LayersControl position="topright" id="layers-control">
+          <LayersControl position="topright" id="layers-control">
           <BaseLayer checked name="OpenStreetMap.Mapnik">
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -422,111 +871,16 @@ class App extends Component{
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker 
-                position={[13.1554, 121.1888]} icon={blueIcon}>
-                <Popup>
-                Province: Oriental Mindoro
-                <br /> 
-                Crop: Banana
-                <br />
-                ph: Moderately Acidic
-                <br /> 
-                <a href="http://localhost:3000/">See More</a>
-                </Popup>
-            </Marker>
-            <Marker 
-                position={[14.1666, 121.2511]} icon={greenIcon}>
-                <Popup>
-                Province: Laguna
-                <br /> 
-                Crop: Corn
-                <br />
-                ph: Neutral
-                <br />
-                <a href="http://localhost:3000/">See More</a>
-                </Popup>
-            </Marker>
-            <Marker 
-                position={[16.6994, 121.6583]} icon={redIcon}>
-                <Popup>
-                Province: Isabela
-                <br /> 
-                Crop: Rice
-                <br />
-                ph: Very Strongly Acidic
-                <br />
-                <a href="http://localhost:3000/">See More</a>
-                </Popup>
-            </Marker>
-             <Marker 
-                position={[16.5758, 121.6906]} icon={blueIcon}>
-                <Popup>
-                Province: Isabela
-                <br /> 
-                Crop: Banana
-                <br />
-                ph: Moderately Acidic
-                <br />
-                <a href="http://localhost:3000/">See More</a>
-                </Popup>
-            </Marker>
-             <Marker 
-                position={[16.7294, 121.6883]} icon={redIcon}>
-                <Popup>
-                Province: Isabela
-                <br />
-                Crop: Rice
-                <br /> 
-                ph: Strongly Acidic
-                <br />
-                <a href="http://localhost:3000/">See More</a>
-                </Popup>
-            </Marker>
-            <Marker 
-                position={[13.1871, 121.212]} icon={redIcon}>
-                <Popup>
-                Province: Oriental Mindoro
-                <br /> 
-                Crop: Rice
-                <br />
-                ph: Very Strongly Acidic
-                <br />
-                <a href="http://localhost:3000/">See More</a>
-                </Popup>
-            </Marker>
-             <Marker 
-                position={[13.1811, 121.1924]} icon={redIcon}>
-                <Popup>
-                Province: Oriental Mindoro
-                <br /> 
-                Crop: Rice
-                <br />
-                ph: Very Strongly Acidic
-                <br />
-                <a href="http://localhost:3000/">See More</a>
-                </Popup>
-            </Marker>
-             <Marker 
-                position={[13.187, 121.2131]} icon={redIcon}>
-                <Popup>
-                Province: Oriental Mindoro
-                <br /> 
-                Crop: Rice
-                <br />
-                ph: Very Strongly Acidic
-                <br />
-                <a href="http://localhost:3000/">See More</a>
-                </Popup>
-            </Marker>
+            
            
           <ZoomControl position="bottomleft" />
           
-
+          <MyMarkersList markers={this.state.markers} />
         </Map>
 
         <Collapse isOpen={this.state.collapseCard}>
-        <Draggable bounds = {{left: 2, top: 2, right: 900, bottom: 150}}>
-        
+        <div className="card-bounds">
+        <Draggable bounds="parent">
          <Card body id='message-form'>
           <CardImg top width="50%" height="50%" src="SoilsCardTitle.png" draggable="false"/>
           <CardText>Select Province</CardText>
@@ -539,60 +893,72 @@ class App extends Component{
               </Col>
             </FormGroup>
           </Form>
-          <CardText>Select Municipality</CardText>
-          <Form onSubmit={this.formSubmitted}>
-
-            <FormGroup row>
-              <Label for="exampleSelect"></Label>
-              <Col sm={10}>
-                <Select value={selectedMunicipality} onChange={this.dropDownMunicipality} options={municipality}/>
-              </Col>
-            </FormGroup>
-            
-            
-          </Form>
           <CardText>Select Crop</CardText>
           <Form onSubmit={this.formSubmitted}>
-
             <FormGroup row>
               <Label for="exampleSelect"></Label>
               <Col sm={10}>
-                <Select value={selectedOption} onChange={this.dropDownChange} options={options}/>
+                <Select 
+                value={selectedOption} 
+                onChange={this.dropDownChange} 
+                options={options}/>
               </Col>
             </FormGroup>
-            <Button type="submit" color="info" onClick={this.toggle}>Search</Button> {' '}
+            <Button type="submit" color="info" onClick={this.toggleSearch}>Search</Button> {' '}
           </Form>
           </Card>
           
         </Draggable>
+        </div>
         </Collapse>
 
         <MDBRow>
         <MDBCol>
           <MDBCard>
             <MDBCardBody>
-              <MDBDataTable striped bordered hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} 
-              data={dataSheet} 
+              <MDBDataTable  striped bordered hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} 
+              data={dataSheet} sorting={false}
             />
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
         </MDBRow>
-        <MDBModal isOpen={this.state.modal} toggle={this.toggleModal} fullHeight position="bottom">
-        <MDBModalHeader toggle={this.toggleModal}>MDBModal title</MDBModalHeader>
-        <MDBModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.
-        </MDBModalBody>
-        <MDBModalFooter>
-          <MDBBtn color="secondary" onClick={this.toggleModal}>Close</MDBBtn>
-          <MDBBtn color="primary">Save changes</MDBBtn>
-        </MDBModalFooter>
-      </MDBModal>
 
-
-
+        <MDBModal id="modal_1" isOpen={this.state.modal} toggle={this.toggleModal} centered>
+          <MDBModalHeader toggle={this.toggleModal}><img class="sarai-modal" src="header_green.png"/><img class="soils-modal" src="SoilsCardTitle.png"/></MDBModalHeader>
+          <MDBModalBody>
+             <b>Date Sampled:</b> {modalSheet.dateSampled}  &nbsp; &nbsp; <b>Coordinates: </b> {modalSheet.latitude}N , {modalSheet.longitude}E
+             <br/>
+             <b>Province:</b> {modalSheet.province}
+             <br/>
+             <b>Municipality</b> {modalSheet.municipality}
+             <br/>
+             <b>Barangay</b> {modalSheet.barangay}
+             <br/>
+             <b>Crop:</b> {modalSheet.crop}
+             <br/>
+             <b>pH:</b> {modalSheet.pH}
+             <br/>
+             <b>Organic Matter (OM):</b> {modalSheet.om}
+             <br/>
+             <b>Nitrogen: </b> {modalSheet.nitrogen}
+             <br/>
+             <b>Phosphorus:</b> {modalSheet.phosphorus}
+             <br/>
+             <b>P Analysis:</b> {modalSheet.pAnalysis}
+             <br/>
+             <b>Potassium:</b> {modalSheet.potassium}
+             <br/>
+             <b>Textural Grade:</b> {modalSheet.texturalGrade}
+             <br/>
+             <b>Remarks:</b> {modalSheet.remarks}
+             <br/>
+             <b>Soil Profile Series:</b> <a href={modalSheet.soilProfile}>Download Soil Profile</a>
+          </MDBModalBody>
+          <MDBModalFooter>
+            <MDBBtn color="secondary" onClick={this.untoggleModal}>Close</MDBBtn>
+          </MDBModalFooter>
+        </MDBModal>
       </div>
     )
   }
