@@ -16,7 +16,7 @@ import { Card, CardImg, CardBody, Button, CardTitle, CardText, Form, FormGroup, 
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-import { Map, TileLayer, Marker, Popup, LayersControl, ZoomControl } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup, LayersControl, ZoomControl, withLeaflet  } from 'react-leaflet';
 //import {BananaMarkers} from "./BananaMarkers";
 
 import { MDBDataTable, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, 
@@ -26,6 +26,7 @@ import { MDBDataTable, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody,
 import Tabletop from 'tabletop';
 import {Modal, Glyphicon} from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
+import { ReactLeafletSearch } from 'react-leaflet-search';
 
 type Position = [number, number];
 
@@ -54,7 +55,7 @@ type State = {
   markers: Array<MarkerData>,
 };
 
-
+const SearchComponent = withLeaflet(ReactLeafletSearch);
 
 const { BaseLayer, Overlay } = LayersControl;
 
@@ -76,14 +77,28 @@ const province = [
   label: 'Laguna' },
   { value: 'oriental mindoro', 
   label: 'Oriental Mindoro' },
-  { value: 'Isabela', 
+  { value: 'isabela', 
   label: 'Isabela' },
   { value: 'north cotabato', 
   label: 'North Cotabato' },
   { value: 'misamis oriental', 
   label: 'Misamis Oriental' },
-  { value: 'misamis oriental', 
-  label: 'Misamis Oriental' },
+  { value: 'ilocos norte', 
+  label: 'Ilocos Norte' },
+  { value: 'albay', 
+  label: 'Albay' },
+  { value: 'bukidnon', 
+  label: 'Bukidnon' },
+  { value: 'iloilo', 
+  label: 'Iloilo' },
+  { value: 'bicol', 
+  label: 'Bicol' },
+  { value: 'cebu', 
+  label: 'Cebu' },
+  { value: 'nueva ecija', 
+  label: 'Nueva Ecija' }, 
+  { value: 'all', 
+  label: 'All' },    
 ];
 
 const municipality = [
@@ -164,6 +179,15 @@ var tomatoIcon = L.icon({
     shadowSize: [68, 95],
 });
 
+var noIcon = L.icon({
+    iconUrl: 'nomarker.png',
+    iconSize: [55, 55],
+    iconAnchor: [12.5, 41],
+    popupAnchor: [0, -41], 
+    shadowUrl: 'my-icon-shadow.png',
+    shadowSize: [68, 95],
+});
+
 const bananaID = '1UEUrcBZWiPYr3f0sOEpcaS5SjpaFO1Dm7e2l47uOaRg';
 const cornID = '1TGbBxufMVRBCGUpNvOTZN9cV6qOGiQaP3FiQD1187FA';
 const cacaoID = '1OfAOQjibxGUTyPPAcgQ7tQX1rx_f2zsXK_MANy97Hq0';
@@ -233,10 +257,87 @@ class App extends Component{
       setBoolean: false,
       pdfText: null,
       soilPdf: null,
+      tableData: [],
+      searchingValue: true, 
+      sortValue: true, 
     };
 
   }
   componentDidMount() {
+    Tabletop.init({
+      key: '10-SwhJ1XueMHIJ_64eOQIFocBKXbeiYwLcp-SVVP62k',
+      callback: googleData => {
+        console.log(googleData)
+        this.setState({
+          tableRows: googleData.map((post) => {
+            return (
+              { 
+                button: <div>
+
+                        <div>
+                        
+                        <a onClick={() => this.toggleModal(post)} >
+                        <FontAwesome
+                          className='fas fa-plus'
+                        />
+                        </a>
+                        </div>
+                        </div>
+                        ,
+                latitude: post.latitude,
+                longitude: post.longitude,
+                province: post.province,
+                crop: post.crop,
+                pH: post.pH,
+                om: post.om,
+                nitrogen: post.nitrogen,
+                phosphorus: post.phosphorus,
+                pAnalysis: post.pAnalysis,
+                potassium: post.potassium,
+              }
+            )
+          }),
+          provinceList: googleData.map((post) => {
+            return (
+              
+                { 
+                value: post.province, label: post.province 
+                }
+              
+            )
+          }),
+          tableData: googleData.map((post) => {
+            return (
+              { 
+                button: <div>
+
+                        <div>
+                        
+                        <a onClick={() => this.toggleModal(post)} >
+                        <FontAwesome
+                          className='fas fa-plus'
+                        />
+                        </a>
+                        </div>
+                        </div>
+                        ,
+                latitude: post.latitude,
+                longitude: post.longitude,
+                province: post.province,
+                crop: post.crop,
+                pH: post.pH,
+                om: post.om,
+                nitrogen: post.nitrogen,
+                phosphorus: post.phosphorus,
+                pAnalysis: post.pAnalysis,
+                potassium: post.potassium,
+              }
+            )
+          }),
+        })
+      },
+      simpleSheet: true
+    })
 
     navigator.geolocation.getCurrentPosition((position) =>  {
       this.setState({
@@ -257,48 +358,17 @@ class App extends Component{
     });
   }
 
-  componentWillUnmount() {
+  
+
+
+  componentDidUpdate() {
     Tabletop.init({
       key: this.state.googleSheetID,
       callback: googleData => {
         console.log(googleData)
         this.setState({
-          tableRows: googleData.map((post) => {
-            return (
-              { 
-                button: <div>
-
-                        <div>
-                        
-                        <button id = "button_toggle" onClick={() => this.toggleModal(post)} >
-                        <FontAwesome
-                          className='fas fa-plus'
-                        />
-                        </button>
-                        </div>
-                        </div>
-                        ,
-                crop: post.crop,
-                pH: post.pH,
-                om: post.om,
-                nitrogen: post.nitrogen,
-                phosphorus: post.phosphorus,
-                pAnalysis: post.pAnalysis,
-                potassium: post.potassium,
-              }
-            )
-          }),
-          provinceList: googleData.map((post) => {
-            return (
-              
-                { 
-                value: post.province, label: post.province 
-                }
-              
-            )
-          }),
           markers: googleData.map((post) => {
-            return (
+              return (
               {
                 key: post.id,
                 position: [post.latitude, post.longitude],
@@ -327,8 +397,7 @@ class App extends Component{
     })
   }
 
-
-  componentDidUpdate() {
+  componentWillUnmount() {
     Tabletop.init({
       key: this.state.googleSheetID,
       callback: googleData => {
@@ -341,14 +410,17 @@ class App extends Component{
 
                         <div>
                         
-                        <button id = "button_toggle" onClick={() => this.toggleModal(post)} >
+                        <a onClick={() => this.toggleModal(post)} >
                         <FontAwesome
                           className='fas fa-plus'
                         />
-                        </button>
+                        </a>
                         </div>
                         </div>
                         ,
+                latitude: post.latitude,
+                longitude: post.longitude,
+                province: post.province,
                 crop: post.crop,
                 pH: post.pH,
                 om: post.om,
@@ -359,6 +431,7 @@ class App extends Component{
               }
             )
           }),
+
           provinceList: googleData.map((post) => {
             return (
               
@@ -369,7 +442,10 @@ class App extends Component{
             )
           }),
           markers: googleData.map((post) => {
-            return (
+            console.log("Provinces are: ");
+            console.log(this.state.selectedProvince.label);
+            console.log(post.province);
+              return (
               {
                 key: post.id,
                 position: [post.latitude, post.longitude],
@@ -396,6 +472,7 @@ class App extends Component{
       },
       simpleSheet: true
     })
+    
   }
 
   
@@ -425,30 +502,97 @@ class App extends Component{
 
   changeIcon(post) {
     var cropIcon;
-    if (post.crop === "Banana"){
-      cropIcon = bananaIcon;
+    if (this.state.selectedProvince.value === 'all' && this.state.selectedOption.value==='all'){
+      if (post.crop === "Banana"){
+        cropIcon = bananaIcon;
+      }
+      else if (post.crop === "Cacao"){
+        cropIcon = cacaoIcon;
+      }
+      else if (post.crop === "Coffee"){
+        cropIcon = coffeeIcon;
+      }
+      else if (post.crop === "Corn"){
+        cropIcon = cornIcon;
+      }
+      else if (post.crop === "Rice"){
+        cropIcon = riceIcon;
+      }
+      else if (post.crop === "Tomato"){
+        cropIcon = tomatoIcon;
+      }
+      else if (post.crop === "Sugarcane"){
+        cropIcon = sugarCaneIcon;
+      }
+
+      else if (post.crop === "Soybean"){
+        cropIcon = soyIcon;
+      }
     }
-    else if (post.crop === "Cacao"){
-      cropIcon = cacaoIcon;
+    else if (this.state.selectedProvince.value === 'all'){
+      if (post.crop === "Banana"){
+        cropIcon = bananaIcon;
+      }
+      else if (post.crop === "Cacao"){
+        cropIcon = cacaoIcon;
+      }
+      else if (post.crop === "Coffee"){
+        cropIcon = coffeeIcon;
+      }
+      else if (post.crop === "Corn"){
+        cropIcon = cornIcon;
+      }
+      else if (post.crop === "Rice"){
+        cropIcon = riceIcon;
+      }
+      else if (post.crop === "Tomato"){
+        cropIcon = tomatoIcon;
+      }
+      else if (post.crop === "Sugarcane"){
+        cropIcon = sugarCaneIcon;
+      }
+
+      else if (post.crop === "Soybean"){
+        cropIcon = soyIcon;
+      }
     }
-    else if (post.crop === "Coffee"){
-      cropIcon = coffeeIcon;
-    }
-    else if (post.crop === "Corn"){
-      cropIcon = cornIcon;
-    }
-    else if (post.crop === "Rice"){
-      cropIcon = riceIcon;
-    }
-    else if (post.crop === "Tomato"){
-      cropIcon = tomatoIcon;
-    }
-    else if (post.crop === "Sugarcane"){
-      cropIcon = sugarCaneIcon;
+    else if (post.province===this.state.selectedProvince.label){
+      if (post.crop === "Banana"){
+        cropIcon = bananaIcon;
+      }
+      else if (post.crop === "Cacao"){
+        cropIcon = cacaoIcon;
+      }
+      else if (post.crop === "Coffee"){
+        cropIcon = coffeeIcon;
+      }
+      else if (post.crop === "Corn"){
+        cropIcon = cornIcon;
+      }
+      else if (post.crop === "Rice"){
+        cropIcon = riceIcon;
+      }
+      else if (post.crop === "Tomato"){
+        cropIcon = tomatoIcon;
+      }
+      else if (post.crop === "Sugarcane"){
+        cropIcon = sugarCaneIcon;
+      }
+
+      else if (post.crop === "Soybean"){
+        cropIcon = soyIcon;
+      }
+      // this.setState({
+      //   location: {
+      //     lat: post.latitude,
+      //     lng: post.longitude, 
+      //   } 
+      // })
     }
 
-    else if (post.crop === "Soybean"){
-      cropIcon = soyIcon;
+
+    else {
+      cropIcon = noIcon;
     }
     return cropIcon
   }
@@ -479,7 +623,7 @@ class App extends Component{
       soilProfile: post.soilProfile,
     });
 
-    
+
   }
 
   untoggleModal() {
@@ -620,10 +764,11 @@ class App extends Component{
         })
       }, 2000);
     }
-
-    alert(this.state.soilProfile);
-    console.log(this.state.soilProfile);
     
+    this.setState({
+      searchingValue: false,
+      sortValue: "disabled",
+    })
     console.log(this.state.selectedOption.value)
   }
 
@@ -666,51 +811,69 @@ class App extends Component{
     const dataSheet = {
       columns: [
         {
-          label: '+',
+          label: '',
           field: 'crop',
-          sort: 'asc',
+          sort: 'disabled',
+          width: 10
+        },
+        {
+          label: 'Lat',
+          field: 'latitude',
+          sort: this.state.sortValue,
+          width: 10
+        },
+        {
+          label: 'Long',
+          field: 'longitude',
+          sort: this.state.sortValue,
+          width: 10
+        },
+        {
+          label: 'Province',
+          field: 'province',
+          sort: this.state.sortValue,
           width: 10
         },
         {
           label: 'Crop',
           field: 'crop',
-          sort: 'asc',
+          sort: this.state.sortValue,
           width: 150
         },
         {
           label: 'pH',
           field: 'pH',
-          sort: 'asc',
+          sort: this.state.sortValue,
           width: 200
         },
         {
           label: 'Organic Matter (OM)',
           field: 'om',
-          sort: 'asc',
+          sort: this.state.sortValue,
           width: 200
         },
         {
           label: 'Nitrogen (N)',
           field: 'nitrogen',
-          sort: 'asc',
+          sort: this.state.sortValue,
           width: 270
         },
         {
           label: 'Phosphorus (P)',
           field: 'phosphorus',
-          sort: 'asc',
+          sort: this.state.sortValue,
           width: 270
         },
         {
           label: 'P Analysis (P)',
           field: 'pAnalysis',
-          sort: 'asc',
+          sort: this.state.sortValue,
           width: 270
         },
         {
           label: 'Potassium (K)',
           field: 'potassium',
-          sort: 'asc',
+          sort: this.state.sortValue,
           width: 270
         },
       ],
@@ -737,9 +900,9 @@ class App extends Component{
       soilProfile: this.state.soilProfile,
     };
 
-    const pList = this.state.provinceList;
+    const pList = this.state.provinceList.filter((val, id, array) => array.indexOf(val) == id);
     const mList = this.state.markersList;
-
+    console.log(pList);
     return (
       <div className="map">
         <div id="navClass">
@@ -876,6 +1039,13 @@ class App extends Component{
           <ZoomControl position="bottomleft" />
           
           <MyMarkersList markers={this.state.markers} />
+
+          <SearchComponent 
+          position="topright"
+          inputPlaceholder="Search"
+          closeResultsOnClick={true} 
+          searchBounds={[[4.21580632, 126.80725617],[21.32178056, 114.09521446]]}
+        />
         </Map>
 
         <Collapse isOpen={this.state.collapseCard}>
@@ -916,8 +1086,8 @@ class App extends Component{
         <MDBCol>
           <MDBCard>
             <MDBCardBody>
-              <MDBDataTable  striped bordered hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} 
-              data={dataSheet} sorting={false}
+              <MDBDataTable  striped bordered hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} searching={this.state.searchingValue}
+              data={dataSheet}
             />
             </MDBCardBody>
           </MDBCard>
@@ -927,13 +1097,15 @@ class App extends Component{
         <MDBModal id="modal_1" isOpen={this.state.modal} toggle={this.toggleModal} centered>
           <MDBModalHeader toggle={this.toggleModal}><img class="sarai-modal" src="header_green.png"/><img class="soils-modal" src="SoilsCardTitle.png"/></MDBModalHeader>
           <MDBModalBody>
-             <b>Date Sampled:</b> {modalSheet.dateSampled}  &nbsp; &nbsp; <b>Coordinates: </b> {modalSheet.latitude}N , {modalSheet.longitude}E
+             <b>Date Sampled:</b> {modalSheet.dateSampled}
+             <br/>
+             <b>Coordinates: </b> {modalSheet.latitude}N , {modalSheet.longitude}E
              <br/>
              <b>Province:</b> {modalSheet.province}
              <br/>
-             <b>Municipality</b> {modalSheet.municipality}
+             <b>Municipality: </b> {modalSheet.municipality}
              <br/>
-             <b>Barangay</b> {modalSheet.barangay}
+             <b>Barangay: </b> {modalSheet.barangay}
              <br/>
              <b>Crop:</b> {modalSheet.crop}
              <br/>
